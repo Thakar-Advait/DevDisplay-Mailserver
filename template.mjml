@@ -1,0 +1,122 @@
+<mjml>
+  <mj-head>
+    <mj-title>DevDisplay Newsletter</mj-title>
+    <mj-font name="Roboto" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
+    <mj-attributes>
+      <mj-all font-family="Roboto, Arial, sans-serif" />
+      <mj-text font-weight="400" font-size="16px" color="#333333" line-height="24px" />
+      <mj-section padding="20px 0" />
+    </mj-attributes>
+    <mj-style>
+      .repo-card {
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .social-icon {
+        display: inline-block;
+        margin: 0 8px;
+      }
+      .header-logo {
+        text-align: center;
+      }
+      .repo-stats {
+        color: #586069;
+        font-size: 14px;
+      }
+      .language-tag {
+        background-color: #f1f8ff;
+        color: #0366d6;
+        border-radius: 12px;
+        padding: 4px 12px;
+        font-weight: 500;
+      }
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="#f5f5f5">
+    <!-- Header -->
+    <mj-section background-color="#ffffff" padding-bottom="0">
+      <mj-column>
+        <mj-image width="150px" src="<%= logoUrl %>" alt="DevDisplay Logo" css-class="header-logo" />
+        <mj-text align="center" font-size="26px" font-weight="700" color="#333333">
+          DevDisplay
+        </mj-text>
+        <mj-divider border-color="#e1e4e8" border-width="1px" padding="10px 0" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Greeting -->
+    <mj-section background-color="#ffffff" padding-top="0">
+      <mj-column>
+        <mj-text align="center" font-size="20px" font-weight="500" padding-top="20px">
+          Hi <%= userName %>,
+        </mj-text>
+        <mj-text align="center" font-size="24px" font-weight="bold" color="#0366d6" padding-bottom="10px">
+          Featuring this week's trending repo! 🚀
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Repository Card -->
+    <mj-section background-color="#ffffff" padding-bottom="0">
+      <mj-column width="90%" background-color="#ffffff" css-class="repo-card">
+        <mj-image padding="15px 15px 0" width="64px" src="<%= authorAvatarUrl %>" alt="Author Avatar" border-radius="50%" />
+        <mj-text align="center" font-size="18px" font-weight="500" padding="5px 25px">
+          <%= authorName %>
+        </mj-text>
+        <mj-text align="center" font-size="22px" font-weight="bold" color="#0366d6" padding="5px 25px">
+          <%= repoTitle %>
+        </mj-text>
+        <mj-text align="center" padding="0 25px 15px">
+          <%= repoDescription %>
+        </mj-text>
+        <mj-text align="center" padding="0 25px" css-class="language-tag" container-background-color="#ffffff">
+          <span style="background-color: #f1f8ff; color: #0366d6; border-radius: 12px; padding: 4px 12px; font-weight: 500;">
+            <%= programmingLanguage %>
+          </span>
+        </mj-text>
+        <mj-text align="center" font-size="14px" padding="10px 25px" css-class="repo-stats">
+          <span style="margin-right: 15px;">⭐ <%= stars %> stars</span>
+          <span>🍴 <%= forks %> forks</span>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Button -->
+    <mj-section background-color="#ffffff" padding-top="20px">
+      <mj-column>
+        <mj-button background-color="#0366d6" color="white" border-radius="4px" font-weight="bold" font-size="16px" href="<%= repoUrl %>" width="200px">
+          View on GitHub
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <!-- Divider before footer -->
+    <mj-section background-color="#ffffff" padding-top="0">
+      <mj-column>
+        <mj-divider border-color="#e1e4e8" border-width="1px" padding="20px 0" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Footer -->
+    <mj-section background-color="#f6f8fa" padding="20px 0">
+      <mj-column>
+        <mj-image width="100px" src="<%= logoUrl %>" alt="DevDisplay Logo" css-class="header-logo" />
+        <mj-text align="center" font-size="20px" font-weight="700" color="#333333" padding-bottom="10px">
+          DevDisplay
+        </mj-text>
+        
+        <!-- Social Links -->
+        <mj-social padding="10px 0">
+          <mj-social-element name="github" href="<%= githubUrl %>" css-class="social-icon"></mj-social-element>
+          <mj-social-element name="twitter" href="<%= twitterUrl %>" css-class="social-icon"></mj-social-element>
+          <mj-social-element name="linkedin" href="<%= linkedinUrl %>" css-class="social-icon"></mj-social-element>
+        </mj-social>
+        
+        <!-- Copyright -->
+        <mj-text align="center" font-size="12px" color="#586069" padding-top="10px">
+          &copy; <%= new Date().getFullYear() %> DevDisplay. All rights reserved.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
