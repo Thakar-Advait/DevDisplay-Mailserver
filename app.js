@@ -49,7 +49,7 @@ const sendEmail = async (htmlContent, recipientEmail) => {
 
     try {
         const info = await transporter.sendMail(mailOptions);
-        
+
         // Log the full response from the email service
         console.log("Email sent:", info);
         return info;  // You can access details like messageId, response, etc.
@@ -74,6 +74,7 @@ app.post("/", async (req, res) => {
         repoUrl
     } = req.body;
     try {
+
         // Load MJML template from file
         const mjmlContent = await fs.readFile("./template.mjml", "utf-8");
 
@@ -93,6 +94,15 @@ app.post("/", async (req, res) => {
             twitterUrl: 'https://twitter.com/devdisplay_',
             linkedinUrl: 'https://linkedin.com/company/devdisplay'
         };
+        // Function to check if a value is neither undefined nor null
+        function isValid(value) {
+            return value !== undefined && value !== null;
+        }
+
+        const isValidData = Object.keys(emailData).every(key => isValid(emailData[key]));
+        if(!isValidData) {
+            return res.status(400).json({"message": "Invalid data provided"});
+        }
 
         // Render the MJML content with EJS
         const htmlContent = ejs.render(mjmlContent, emailData);
@@ -100,7 +110,7 @@ app.post("/", async (req, res) => {
         // Convert MJML to HTML
         const compiledHtml = convertMJMLToHTML(htmlContent);
         if (!compiledHtml) {
-            return res.status(500).send("Error converting MJML to HTML");
+            return res.status(500).json({"message": "Failed to convert MJML to HTML"});
         }
 
         // Send the email
@@ -109,19 +119,17 @@ app.post("/", async (req, res) => {
         // Log and respond to the client
         if (emailInfo) {
             console.log("Successfully sent email:", emailInfo);
-            res.status(200).send("Email sent successfully");
+            res.status(200).json({"message": "Email sent successfully \n" + emailInfo.messageId});
         } else {
             res.status(500).send("Failed to send email");
         }
     } catch (error) {
         console.error("Error handling request:", error);
-        res.status(500).send("An error occurred while sending the email.");
+        res.status(500).json({"message": "Internal server error"});
     }
 });
 
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server is running on port ${PORT}`);
     console.log(`http://localhost:${PORT}`);
-    console.log(`SMTP API KEY: ${process.env.SMTP_API_KEY}`);
-    console.log(`SENDER MAIL: ${process.env.SENDER_MAIL}`);
 });
